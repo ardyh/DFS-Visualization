@@ -1,0 +1,17 @@
+C:\Users\USER\source\repos\Stima\Stima\obj\Debug\Stima.csprojAssemblyReference.cache
+C:\Users\USER\source\repos\Stima\Stima\obj\Debug\Stima.Form1.resources
+C:\Users\USER\source\repos\Stima\Stima\obj\Debug\Stima.Properties.Resources.resources
+C:\Users\USER\source\repos\Stima\Stima\obj\Debug\Stima.csproj.GenerateResource.cache
+C:\Users\USER\source\repos\Stima\Stima\obj\Debug\Stima.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\Stima\Stima\bin\Debug\Stima.exe.config
+C:\Users\USER\source\repos\Stima\Stima\bin\Debug\Stima.exe
+C:\Users\USER\source\repos\Stima\Stima\bin\Debug\Stima.pdb
+C:\Users\USER\source\repos\Stima\Stima\bin\Debug\Microsoft.Msagl.dll
+C:\Users\USER\source\repos\Stima\Stima\bin\Debug\Microsoft.Msagl.Drawing.dll
+C:\Users\USER\source\repos\Stima\Stima\bin\Debug\Microsoft.Msagl.GraphViewerGdi.dll
+C:\Users\USER\source\repos\Stima\Stima\bin\Debug\Microsoft.Msagl.xml
+C:\Users\USER\source\repos\Stima\Stima\bin\Debug\Microsoft.Msagl.Drawing.xml
+C:\Users\USER\source\repos\Stima\Stima\bin\Debug\Microsoft.Msagl.GraphViewerGdi.xml
+C:\Users\USER\source\repos\Stima\Stima\obj\Debug\Stima.csproj.CopyComplete
+C:\Users\USER\source\repos\Stima\Stima\obj\Debug\Stima.exe
+C:\Users\USER\source\repos\Stima\Stima\obj\Debug\Stima.pdb
