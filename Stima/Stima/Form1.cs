@@ -71,28 +71,18 @@ namespace Stima
                 data[i - 1, j - 1] = 1;
                 data[j - 1, i - 1] = 1;
             }
-
-
-            /*
-            //create the graph content 
-            graph.AddEdge("A", "B");
-            graph.AddEdge("A", "C").Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
-            graph.FindNode("A").Attr.FillColor = Microsoft.Msagl.Drawing.Color.Magenta;
-            graph.FindNode("B").Attr.FillColor = Microsoft.Msagl.Drawing.Color.MistyRose;
-            Microsoft.Msagl.Drawing.Node c = graph.FindNode("C");
-            c.Attr.FillColor = Microsoft.Msagl.Drawing.Color.PaleGreen;
-            c.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
-            */
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+           //Milik InitializeComponent() jangan didelete
 
         }
 
         private void buttonsolve_Click()
         {
+            //action untuk button solve
             int a = Convert.ToInt32(textBox1.Text);
             int x = Convert.ToInt32(textBox2.Text)-1;
             int y = Convert.ToInt32(textBox3.Text)-1;
@@ -112,14 +102,21 @@ namespace Stima
 
         private void solveEksternal(object sender, EventArgs e)
         {
+            //action untuk solve Eksternal
+            //mengambil query dari file eksternal dan menampilkannya
+
             TextReader tr = new StreamReader("query.txt");
             int a, x, y;
             int nquery = Convert.ToInt32(tr.ReadLine());
+            Queries.Items.Clear();
+            Answers.Items.Clear();
+            System.IO.File.WriteAllText(@"answer.txt", "");
 
             string s;
             while ((s = tr.ReadLine()) != null)
             {
                 string[] strtemp = s.Split(' ');
+                string jawaban;
                 a = Convert.ToInt32(strtemp[0]);
                 x = Convert.ToInt32(strtemp[1]);
                 y = Convert.ToInt32(strtemp[2]);
@@ -127,12 +124,20 @@ namespace Stima
                 //insert dfs
                 if(Solusi(a, x-1, y-1))
                 {
-                    Answers.Items.Add("YA");
+                    jawaban = "YA";
                 }
                 else
                 {
-                    Answers.Items.Add("TIDAK");
+                    jawaban = "TIDAK";
                 }
+
+                Answers.Items.Add(jawaban);
+                using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(@"answer.txt", true))
+                {
+                    file.WriteLine(jawaban);
+                }
+
 
                 // Nampilin query
                 Queries.Items.Add(s);
@@ -143,6 +148,8 @@ namespace Stima
         
 
         public void resetVariabel() {
+            //reset warna dari graph
+
             for(int i=0; i<n+1; i++)
             {
                 jalur[i] = 0;
@@ -155,6 +162,8 @@ namespace Stima
 
         public void ReadGraph()
         {
+            //membaca graph dari file eksternal  
+
             TextReader tr = new StreamReader("input.txt");
             int i = 0;
 
@@ -175,6 +184,8 @@ namespace Stima
 
         public Boolean Solusi(int a,int b,int c)
         {
+            //Mencari solusi melalui DFS
+
             caraJalan = a;
             tmptJose = b;
             tmptFerdiand = c;
@@ -186,38 +197,38 @@ namespace Stima
 
         public int GetSimpul(int i, int j)
         {
+            //Getter Simpul
             return data[i, j];
         }
 
         public int xSudahKunjungi(int x)
         {
+            //Getter array dikunjungi
             return dikunjungi[x];
         }
 
         public void SetDikunjungi(int x)
         {
+            //Setter array dikunjungi
             dikunjungi[x] = 1;
         }
 
         public void SetJalur(int value)
         {
+            //Setter array jalur
             jalur[neffJalur] = value;
             neffJalur++;
         }
 
-        public void setAntrian(int value)
-        {
-            antrian[neffAntrian] = value;
-            neffAntrian++;
-        }
-
         public void ResetJalur(int value)
         {
+            //Untuk backtrack jalur
             neffJalur = value;
         }
 
         public bool xIsDaun(int x)
         {
+            //Mengecek apakah suatu simpul daun atau tidak
             bool isDaun = true;
             for (int i = 0; i < n; i++)
             {
@@ -233,6 +244,7 @@ namespace Stima
 
         public void DFS(int x)
         {
+            //Algoritma DFS
             if (jalanAja == false)
             {
                 SetDikunjungi(x);
@@ -243,19 +255,24 @@ namespace Stima
 
         private void Form1_Click(object sender, EventArgs e)
         {
+            //Action Bila Form1 di click
             buttonsolve_Click();
         }
 
         private void Clean_Click(object sender, EventArgs e)
         {
+            //Action bila button clear di click
             for (int i = 0; i < n; i++)
             {
                 graph.FindNode(Convert.ToString(i + 1)).Attr.FillColor = Microsoft.Msagl.Drawing.Color.White;
             }
+            gViewer.Graph = graph;
         }
 
         private void Queries_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Mencari solusi dari sebuah query yang ditaruh pada file eksternal
+
             String[] query = (Convert.ToString(Queries.SelectedItem)).Split(' ') ;
             int a = Convert.ToInt32(query[0]);
             int x = Convert.ToInt32(query[1]);
@@ -264,8 +281,23 @@ namespace Stima
             Boolean tem =Solusi(a, x - 1, y - 1) ;
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (textBox4.Text != "")
+            {
+                using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(@"answer.txt", true))
+                {
+                    file.WriteLine(textBox4.Text);
+                }
+            }
+        }
+
         public void cekJalur()
         {
+            //Mengecek jalur dfs, dan apakah ditemukan tempat jose dan ferdinant
+            //Sekaligus mengeprint jalur ke viewer
+
             int place1 = -99;
             int place2 = -99;
             for (int i = 0; i < neffJalur; i++)
@@ -290,6 +322,7 @@ namespace Stima
                         {
                             graph.FindNode(Convert.ToString(jalur[i])).Attr.FillColor = Microsoft.Msagl.Drawing.Color.MistyRose;
                         }
+                        gViewer.Graph = graph;
                     }
                 }
                 else
@@ -301,6 +334,7 @@ namespace Stima
                         {
                             graph.FindNode(Convert.ToString(jalur[i])).Attr.FillColor = Microsoft.Msagl.Drawing.Color.MistyRose;
                         }
+                        gViewer.Graph = graph;
                     }
                 }
             }
@@ -308,6 +342,8 @@ namespace Stima
 
         public void PrintJalur()
         {
+            //Mengeprint jalur ke terminal
+
             for (int i = 0; i < neffJalur; i++)
             {
                 Console.Write(jalur[i]);
@@ -318,6 +354,8 @@ namespace Stima
 
         public void setTetangganX(int x)
         {
+            //Mengecek tetangga dari suatu simpul
+
             int v = neffJalur;
             bool isDaun = xIsDaun(x);
             if (caraJalan == 0)
